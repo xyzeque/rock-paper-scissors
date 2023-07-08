@@ -1,5 +1,7 @@
 
-// get computer choice using Math.random
+function game() {
+  for (let i = 1; i <= 5; i++) {
+    // get computer choice using Math.random
 function getComputerChoice() {
   const choice = Math.floor(Math.random() * 3) + 1;
   console.log(choice);
@@ -15,8 +17,6 @@ function getComputerChoice() {
       break;
   }
 }
-
-getComputerChoice();
 
 // rock paper scissors game logic
 function playRound(playerSelection, computerSelection) {
@@ -37,9 +37,17 @@ function playRound(playerSelection, computerSelection) {
     return "You Lose! Rock beats Scissors";
   } else if (playerSelection == 'scissors' && computerSelection == 'paper') {
     return "You Win! Scissors beats Paper";
+  } else {
+    return "That won't work here."
   }
 }
 
-const playerSelection = 'rOck';
+const playerSelection = prompt("Rock, Paper, Scissors? You Choose.");
 const computerSelection = getComputerChoice();
 console.log(playRound(playerSelection, computerSelection));
+  }
+}
+
+game();
+
+
