@@ -1,5 +1,6 @@
 let playerScore = 0;
 let computerScore = 0;
+const winningScore = 5;
 
 function game() {
 
@@ -68,53 +69,59 @@ function game() {
     computerScoreText.textContent = computerScore;
   }
 
-  function gameWinner() {
-    if (playerScore == 5 || computerScore == 5) {
-      if (playerScore > computerScore) {
-        return `You Win. Player: ${playerScore} to Computer: ${computerScore}`
-      } else if (playerScore < computerScore) {
-        return `You Lose. Player: ${playerScore} to Computer: ${computerScore}`
-      } else {
-        return `Wow, It's a tie. Player: ${playerScore} to Computer: ${computerScore}`
-      }
-    } else if (playerScore > 5 || computerScore > 5) {
-      playerScore = 0;
-      computerScore = 0;
-      return 'Play Again?'
-    } else {
-      return 'Keep playing.';
-    }
-
+  function resetGame() {
+    playerScore = 0;
+    computerScore = 0;
+    playerScoreText.textContent = '0';
+    computerScoreText.textContent = '0';
   }
 
-  // Add event listeners to the buttons
-  rockButton.addEventListener('click', () => {
-    const computerSelection = getComputerChoice();
-    const result = playRound('rock', computerSelection);
-    resultDiv.textContent = result;
-    updateScore();
-    finalResultText.textContent = gameWinner();
-    
-  });
-  paperButton.addEventListener('click', () => {
-    const computerSelection = getComputerChoice();
-    const result = playRound('paper', computerSelection);
-    resultDiv.textContent = result;
-    updateScore();
-    finalResultText.textContent = gameWinner();
+  function gameWinner() {
+    if (playerScore >= winningScore || computerScore >= winningScore) {
+      if (playerScore > computerScore) {
+        finalResultText.textContent = `You Win. Player: ${playerScore} to Computer: ${computerScore}`;
+      } else if (playerScore < computerScore) {
+        finalResultText.textContent = `You Lose. Player: ${playerScore} to Computer: ${computerScore}`;
+      } else {
+        finalResultText.textContent = `Wow, It's a tie. Player: ${playerScore} to Computer: ${computerScore}`;
+      }
+    }
+  }
 
-  });
-  scissorsButton.addEventListener('click', () => {
-    const computerSelection = getComputerChoice();
-    const result = playRound('scissors', computerSelection);
-    resultDiv.textContent = result;
-    updateScore();
-    finalResultText.textContent = gameWinner();
 
-  });
-
-  // Displays final result of the game
-  // console.log(gameWinner());
+    // Add event listeners to the buttons
+    rockButton.addEventListener('click', () => {
+      const computerSelection = getComputerChoice();
+      const result = playRound('rock', computerSelection);
+      resultDiv.textContent = result;
+      updateScore();
+      gameWinner();
+      if (playerScore >= winningScore || computerScore >= winningScore) {
+        resetGame();
+      }
+    });
+  
+    paperButton.addEventListener('click', () => {
+      const computerSelection = getComputerChoice();
+      const result = playRound('paper', computerSelection);
+      resultDiv.textContent = result;
+      updateScore();
+      gameWinner();
+      if (playerScore >= winningScore || computerScore >= winningScore) {
+        resetGame();
+      }
+    });
+  
+    scissorsButton.addEventListener('click', () => {
+      const computerSelection = getComputerChoice();
+      const result = playRound('scissors', computerSelection);
+      resultDiv.textContent = result;
+      updateScore();
+      gameWinner();
+      if (playerScore >= winningScore || computerScore >= winningScore) {
+        resetGame();
+      }
+    });
 
 }
 
