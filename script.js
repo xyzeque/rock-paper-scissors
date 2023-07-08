@@ -64,17 +64,15 @@ function game() {
     }
   }
 
-  for (let i = 1; i <= 5; i++) {
-    const playerSelection = prompt("Rock, Paper, Scissors? You Choose.");
-    const computerSelection = getComputerChoice();
-    console.log(playRound(playerSelection, computerSelection));  
-  }
-  
+  const playerSelection = prompt("Rock, Paper, Scissors? You Choose.");
+  const computerSelection = getComputerChoice();
+  console.log(playRound(playerSelection, computerSelection));
+
   // display final result of the game
   console.log(gameWinner());
 }
 
-// run game loop
+// run game
 game();
 
 
