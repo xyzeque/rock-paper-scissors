@@ -1,14 +1,19 @@
+let playerScore = 0;
+let computerScore = 0;
 
 function game() {
-  let playerScore = 0;
-  let computerScore = 0;
 
   // Get the buttons by their class names
   const rockButton = document.querySelector('.rock');
   const paperButton = document.querySelector('.paper');
   const scissorsButton = document.querySelector('.scissors');
 
+  // Get the result div
   const resultDiv = document.querySelector('.result');
+
+  // Get the score elements
+  const playerScoreText = document.querySelector('.playerScore');
+  const computerScoreText = document.querySelector('.computerScore');
 
   // Get computer choice using Math.random
   function getComputerChoice() {
@@ -55,8 +60,12 @@ function game() {
     }
   }
 
-  function gameWinner() {
+  function updateScore() {
+    playerScoreText.textContent = playerScore;
+    computerScoreText.textContent = computerScore;
+  }
 
+  function gameWinner() {
     if (playerScore > computerScore) {
       return `You Win. Player: ${playerScore} to Computer: ${computerScore}`
     } else if (playerScore < computerScore) {
@@ -69,24 +78,23 @@ function game() {
   // Add event listeners to the buttons
   rockButton.addEventListener('click', () => {
     const computerSelection = getComputerChoice();
-    console.log(playRound('rock', computerSelection));
     const result = playRound('rock', computerSelection);
     resultDiv.textContent = result;
+    updateScore();
     
   });
   paperButton.addEventListener('click', () => {
     const computerSelection = getComputerChoice();
-    console.log(playRound('paper', computerSelection));
     const result = playRound('paper', computerSelection);
     resultDiv.textContent = result;
+    updateScore();
 
   });
   scissorsButton.addEventListener('click', () => {
     const computerSelection = getComputerChoice();
-    console.log(playRound('scissors', computerSelection));
     const result = playRound('scissors', computerSelection);
     resultDiv.textContent = result;
-
+    updateScore();
   });
 
   // Displays final result of the game
