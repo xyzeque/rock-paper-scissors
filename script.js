@@ -8,6 +8,8 @@ function game() {
   const rockButton = document.querySelector('.rock');
   const paperButton = document.querySelector('.paper');
   const scissorsButton = document.querySelector('.scissors');
+  const resetButton = document.querySelector('.reset');
+
 
   // Get the result div
   const resultDiv = document.querySelector('.result');
@@ -74,6 +76,8 @@ function game() {
     computerScore = 0;
     playerScoreText.textContent = '0';
     computerScoreText.textContent = '0';
+    resultDiv.textContent = '';
+    finalResultText.textContent = '';
   }
 
   function gameWinner() {
@@ -85,47 +89,46 @@ function game() {
       } else {
         finalResultText.textContent = `Wow, It's a tie. Player: ${playerScore} to Computer: ${computerScore}`;
       }
+      setTimeout(() => {
+        resetGame();
+      }, 2000);
     }
+
   }
 
 
-    // Add event listeners to the buttons
-    rockButton.addEventListener('click', () => {
-      const computerSelection = getComputerChoice();
-      const result = playRound('rock', computerSelection);
-      resultDiv.textContent = result;
-      updateScore();
-      gameWinner();
-      if (playerScore >= winningScore || computerScore >= winningScore) {
-        resetGame();
-      }
-    });
-  
-    paperButton.addEventListener('click', () => {
-      const computerSelection = getComputerChoice();
-      const result = playRound('paper', computerSelection);
-      resultDiv.textContent = result;
-      updateScore();
-      gameWinner();
-      if (playerScore >= winningScore || computerScore >= winningScore) {
-        resetGame();
-      }
-    });
-  
-    scissorsButton.addEventListener('click', () => {
-      const computerSelection = getComputerChoice();
-      const result = playRound('scissors', computerSelection);
-      resultDiv.textContent = result;
-      updateScore();
-      gameWinner();
-      if (playerScore >= winningScore || computerScore >= winningScore) {
-        resetGame();
-      }
-    });
+  // Add event listeners to the buttons
+  rockButton.addEventListener('click', () => {
+    const computerSelection = getComputerChoice();
+    const result = playRound('rock', computerSelection);
+    resultDiv.textContent = result;
+    updateScore();
+    gameWinner();
+  });
+
+  paperButton.addEventListener('click', () => {
+    const computerSelection = getComputerChoice();
+    const result = playRound('paper', computerSelection);
+    resultDiv.textContent = result;
+    updateScore();
+    gameWinner();
+  });
+
+  scissorsButton.addEventListener('click', () => {
+    const computerSelection = getComputerChoice();
+    const result = playRound('scissors', computerSelection);
+    resultDiv.textContent = result;
+    updateScore();
+    gameWinner();
+  });
+
+  resetButton.addEventListener('click', () => {
+    resetGame();
+  });
 
 }
 
-// run game
+// Runs game
 game();
 
 
