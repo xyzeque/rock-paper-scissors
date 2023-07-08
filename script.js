@@ -3,6 +3,11 @@ function game() {
   let playerScore = 0;
   let computerScore = 0;
 
+  // Get the buttons by their class names
+  const rockButton = document.querySelector('.rock');
+  const paperButton = document.querySelector('.paper');
+  const scissorsButton = document.querySelector('.scissors');
+
   // get computer choice using Math.random
   function getComputerChoice() {
     const choice = Math.floor(Math.random() * 3) + 1;
@@ -23,7 +28,7 @@ function game() {
   // rock paper scissors game logic
   function playRound(playerSelection, computerSelection) {
 
-    playerSelection = playerSelection.toLowerCase();
+    // playerSelection = playerSelection.toLowerCase();
 
     if (playerSelection == computerSelection) {
       return "It's a Tie!"
@@ -64,12 +69,24 @@ function game() {
     }
   }
 
-  const playerSelection = prompt("Rock, Paper, Scissors? You Choose.");
-  const computerSelection = getComputerChoice();
-  console.log(playRound(playerSelection, computerSelection));
+  // Add event listeners to the buttons
+  rockButton.addEventListener('click', () => {
+    const computerSelection = getComputerChoice();
+    console.log(playRound('rock', computerSelection));
+    
+  });
+  paperButton.addEventListener('click', () => {
+    const computerSelection = getComputerChoice();
+    console.log(playRound('paper', computerSelection));
+  });
+  scissorsButton.addEventListener('click', () => {
+    const computerSelection = getComputerChoice();
+    console.log(playRound('scissors', computerSelection));
+  });
 
-  // display final result of the game
-  console.log(gameWinner());
+  // Displays final result of the game
+  // console.log(gameWinner());
+
 }
 
 // run game
