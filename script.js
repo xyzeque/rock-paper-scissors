@@ -21,6 +21,8 @@ getComputerChoice();
 // rock paper scissors game logic
 function playRound(playerSelection, computerSelection) {
 
+  playerSelection = playerSelection.toLowerCase();
+
   if (playerSelection == computerSelection) {
     return "It's a Tie!"
   } else if (playerSelection == 'rock' && computerSelection == 'paper') {
@@ -38,5 +40,6 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
+const playerSelection = 'rOck';
 const computerSelection = getComputerChoice();
-console.log(playRound('scissors', computerSelection));
+console.log(playRound(playerSelection, computerSelection));
