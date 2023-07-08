@@ -15,6 +15,9 @@ function game() {
   const playerScoreText = document.querySelector('.playerScore');
   const computerScoreText = document.querySelector('.computerScore');
 
+  // Get final result
+  const finalResultText = document.querySelector('.finalResult');
+
   // Get computer choice using Math.random
   function getComputerChoice() {
     const choice = Math.floor(Math.random() * 3) + 1;
@@ -66,13 +69,22 @@ function game() {
   }
 
   function gameWinner() {
-    if (playerScore > computerScore) {
-      return `You Win. Player: ${playerScore} to Computer: ${computerScore}`
-    } else if (playerScore < computerScore) {
-      return `You Lose. Player: ${playerScore} to Computer: ${computerScore}`
+    if (playerScore == 5 || computerScore == 5) {
+      if (playerScore > computerScore) {
+        return `You Win. Player: ${playerScore} to Computer: ${computerScore}`
+      } else if (playerScore < computerScore) {
+        return `You Lose. Player: ${playerScore} to Computer: ${computerScore}`
+      } else {
+        return `Wow, It's a tie. Player: ${playerScore} to Computer: ${computerScore}`
+      }
+    } else if (playerScore > 5 || computerScore > 5) {
+      playerScore = 0;
+      computerScore = 0;
+      return 'Play Again?'
     } else {
-      return `Wow, It's a tie. Player: ${playerScore} to Computer: ${computerScore}`
+      return 'Keep playing.';
     }
+
   }
 
   // Add event listeners to the buttons
@@ -81,6 +93,7 @@ function game() {
     const result = playRound('rock', computerSelection);
     resultDiv.textContent = result;
     updateScore();
+    finalResultText.textContent = gameWinner();
     
   });
   paperButton.addEventListener('click', () => {
@@ -88,6 +101,7 @@ function game() {
     const result = playRound('paper', computerSelection);
     resultDiv.textContent = result;
     updateScore();
+    finalResultText.textContent = gameWinner();
 
   });
   scissorsButton.addEventListener('click', () => {
@@ -95,6 +109,8 @@ function game() {
     const result = playRound('scissors', computerSelection);
     resultDiv.textContent = result;
     updateScore();
+    finalResultText.textContent = gameWinner();
+
   });
 
   // Displays final result of the game
